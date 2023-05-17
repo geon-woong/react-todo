@@ -29,44 +29,38 @@ function App() {
    * 할일 추가 이벤트 핸들러
    */
   const onInsert = useCallback(text =>{
-    setTodos([
-      ...todos,
-      {
-        id: nextId.current,
-        text,
-        checked: false,
-      }
-    ])
+    const todo = {
+      id: nextId.current,
+      text,
+      checked: false,
+    }
+    setTodos(todos => todos.concat(todo));
     nextId.current++;
-  },[todos])
+  },[])
 
   /**
    * 할일 삭제 이벤트 핸들러
    */
   const onRemove = useCallback(id =>{
-    setTodos(
+    setTodos(todos=>      
       /**
-       * 인자로 받은 아이디 값과 다른 요소들만 포함된
-       * 새로운 배열을 만들어 저장
-       */
-      todos.filter(todo =>todo.id !== id)
-    )
-  },[todos])
+      * 인자로 받은 아이디 값과 다른 요소들만 포함된
+      * 새로운 배열을 만들어 저장
+      */
+     todos.filter(todo =>todo.id !== id)
+)
+  },[])
 
   /**
    * 할일 완료/미완료 이벤트 핸들러
    */
   const onToggle = useCallback(id=>{
-    setTodos(
+    setTodos(todos=>
       todos.map(todo=>
-        todo.id === id ? {
-          ...todo,
-          checked: !todo.checked
-        } : 
-        todo,
+        todo.id === id ? {...todo,checked: !todo.checked} : todo,
         )
     )
-  },[todos])
+  },[])
 
   return (
       <TodoTemplate>

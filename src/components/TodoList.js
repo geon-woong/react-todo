@@ -1,6 +1,7 @@
+import React from "react";
 import TodoListItem from "./TodoListItem"
 
-export const TodoList = ({todos,onRemove,onToggle}) => {
+const TodoList = ({todos,onRemove,onToggle}) => {
 
     return(
         <div className="py-3">
@@ -17,3 +18,5 @@ export const TodoList = ({todos,onRemove,onToggle}) => {
         </div>
     )
 }
+
+export default React.memo(TodoList);
